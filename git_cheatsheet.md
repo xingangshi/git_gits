@@ -382,9 +382,7 @@ or
 ### 6. 其他
 #### 6.1 命令行我自己常用的 git 历史查询的别名
 ##### 6.1.1 git lg
-```lua
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-```
+> `lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit`
 ##### 6.1.2 git tlg
 ```lua
   tlog = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
@@ -394,9 +392,8 @@ or
   plog = log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'
 ```
 ##### 6.1.4 git glg
-```lua
-  glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-```
+> `glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'`
+
 #### 6.3 所有提交者的提交次数排行榜
 ```lua
   rank = shortlog -sn --no-merges
