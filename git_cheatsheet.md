@@ -244,30 +244,30 @@
   $git remote -v
 ```
 ##### 1.7.2  创建一个连接到远程仓库的连接（假如 origin 没有设置）
-```  python
+```lua
   $git remote add remote_origin_name https://one_git_remote_url
 ```
 ##### 1.7.3 当前分支 push 到 远端分支 - 1
-```  python
+```lua
 #上传本地所有分支代码到远程对应的分支上
   $git push
 ```
 ##### 1.7.3 当前分支 push 到 远端分支 - 2
-```  python
+```lua
 #当前分支与多个主机存在追踪关系，则可以使用 -u 选项指定一个默认主机，后面就可以不加任何参数使用 git push。
   $git push -u orgin master
 ```
 ##### 1.7.4 当前分支 push 到 远端分支 - 3
-```  python
+```lua
 #上传本地当前分支代码到 master 分支
   $git push origin master
 ```
 ##### 1.7.4 获取远端对应分支更新到本地
-```  python
+```lua
   $git pull
 ```
 ##### 1.7.5  获取远端指定分支名 branch_name 到本地
-```  python
+```lua
   $git pull origin branch_name
 ```
 ##### 1.7.6 获取远端分支的更新历史 - 1
@@ -292,7 +292,7 @@
 ```
 ### 2. 一些资料
 #### 2.1 git 命令在线学习
-```  python
+```lua
   https://try.github.io
 ```
 #### 2.2 git 分支在线学习
