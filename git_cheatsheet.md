@@ -13,7 +13,7 @@
 > 5. Git 使用SHA-1哈希算法确保代码内容的完整性以及出问题时对版本库最低的破坏，SVN 相比就差一些。
 
 #### 0.2 Git 对象
-```
+```lua
 1. 所有用来表示项目历史信息的文件，是通过一个40个字符的（40-digit）“对象名”来索引的，对象名看起来像这样:
                  3ff87c4664981e243g625791c8ea3bbb5f2279a3。
    每一个“对象名”都是对“对象”内容做SHA1哈希计算得来的，从而保证两个不同内容的对象不可能有相同的“对象名”
@@ -24,6 +24,7 @@
                 一些时间点的是元数据，如 时间戳、最后一个提交者等；
   2.4 tag    -- 标记某一个 commit 的方法。
 ```
+
 #### 0.3 Git 使用时的数据转换
 ```lua
 # git 的四区 ：工作区、暂存区、本地仓库及远程仓库及其使用时的关系。
@@ -49,67 +50,55 @@
 ### 1. 命令
 #### 1.1 开始
 ##### 1.1.1 当前文件夹初始化为 git 本地仓库
-```lua
-  $git init
-```
+> `$git init`
+
 ##### 1.1.2 从远程 git 仓库获取代码
-```lua
-  $git clone url
-```
+> `$git clone url`
+
 #### 1.2 配置
 ##### 1.2.1 设置命令行显示颜色
-```lua
-  $git config --global color.ui true
-```
+> `$git config --global color.ui true`
+
 ##### 1.2.1 设置 push 到远端 分支时， 默认 push 的本地分支
-```lua
-  $git config --global push.default current
-```
+> `$git config --global push.default current`
+
 ##### 1.2.1 设置默认的编辑器
-```lua
-  $git config --global core.editor vim
-```
+> `$git config --global core.editor vim`
+
 ##### 1.2.1 设置使用 git 时默认的用户名（一般设置为名字或工号）
-```lua
-  $git config --global user.name "user_name"
-```
+> `$git config --global user.name "user_name"`
+
 ##### 1.2.1 设置使用 git 时默认的邮箱名（一般设置为公司内的邮箱）
-```lua
-  $git config --global user.email "user_name@126.com"
-```
+> `$git config --global user.email "user_name@gmail.com"`
+
 ##### 1.2.1 设置默认的 git diff 时比较工具
-```lua
-  $git config --global diff.tool diff3
-```
+> `$git config --global diff.tool diff3`
+
 #### 1.3 本地分支操作
 ##### 1.3.1 查看所有本地分支
-```lua
-  $git branch
-```
+> `$git branch`
+
 ##### 1.3.2 切换到一个已经存在的本地分支
-```lua
-  $git checkout local_branch_name
-```
+> `$git checkout local_branch_name`
+
 ##### 1.3.3 从本地分支切换到一个新建的分支 new_branch_name
-```lua
-  $git checkout -b new_branch_name
-```
+> `$git checkout -b new_branch_name`
+
 ##### 1.3.4 合并 other_branch_name 名的分支到当前分支（不保留被合并分支的历史信息）
-```lua
-  $git merge other_branch_name
-```
-```lua
+> `$git merge other_branch_name`
+
+ ```lua
  #feature 分支合并到当前分支 develop：git merge feature
  #  | <- develop -> |
  #  |               |
  # A.1 --> A.2 --> A.3 -- B.1 --> B.2 --> B.3
  #                        |               |
  #                        | <- feature -> |
-```
+ ```
+
 ##### 1.3.5 合并 other_branch_name 名的分支到当前分支（保留被合并分支的历史信息）
-```lua
-  $git merge –no-ff other_branch_name
-```
+> `$git merge –no-ff other_branch_name
+
 ```lua
 #feature 分支合并到当前分支 develop：git merge –no-ff feature
 #   | <- develop -> |
@@ -120,302 +109,241 @@
 #                        |               |
 #                        | <- feature -> |
 ```
+
 ##### 1.3.6 删除本地分支 branch_name（非强制删除，分支未合并时，会提示）
-```lua
-  $git branch -d branch_name
-```
+> `$git branch -d branch_name`
+
 ##### 1.3.7 删除本地分支 branch_name （强行删除分支，不做任何提示，类似 rm -rf）
-```lua
-  $git branch -D branch_name
-```
+> `$git branch -D branch_name`
+
 #### 1.4 更新当前分支
 ##### 1.4.1 查看所有提交
-```lua
-  $git log
-```
+> `$git log`
+
 ##### 1.4.2 展示好看一些的查询
-```lua
-  $git log --pretty=format:"%h %s" --graph
-```
+> `$git log --pretty=format:"%h %s" --graph`
+
 ##### 1.4.3 查看 user_name 用户过去一周做过什么
-```lua
-  $git log --author='user_name' --after={1.week.ago} --pretty=oneline --abbrev-commit
-```
+> `$git log --author='user_name' --after={1.week.ago} --pretty=oneline --abbrev-commit`
+
 ##### 1.4.4 查看所有未被合并过的提交信息（假如该分支是从 master 创建的）
-```lua
-  $git log --no-merges master..
-```
+> `$git log --no-merges master..`
+
 ##### 1.4.5 查看当前分支名称
-```lua
-  $git branch
-```
+> `$git branch`
+
 ##### 1.4.6 查看当前分支的状态
-```lua
-#比 git status 更简洁化的一个命令
-  $git status -s
-```
+> 比 git status 更简洁化的一个命令
+>
+> `$git status -s`
+
 ##### 1.4.7 增加指定文件名 file_name 到待提交的 list 中
-```lua
-  $git add file_name
-```
+> `$git add file_name`
+
 ##### 1.4.8 增加所有未提交的文件 到待提交的 list 中
-```lua
-  $git add .
-```
+> `$git add .`
+
 ##### 1.4.8 增加指定类型 .txt 格式的到待 提交的 list 中。
-```lua
-  $git add '*.txt'
-```
+> `$git add '*.txt'`
+
 ##### 1.4.9 让 git 不再 提交指定的文件  file_name
-```lua
-  $git rm file_name
-```
+> `$git rm file_name`
+
 ##### 1.4.10 使用 git 默认的编辑器将待提交的 list 中文件提交
-```lua
-  $git commit
-```
+> `$git commit`
+
 ##### 1.4.11 通过命名行的模式将待提交的 list 中文件提交
-```lua
-  $git commit -m 'your commit msg'
-```
+> `$git commit -m 'your commit msg'`
+
 ##### 1.4.12 修改已经提交但是未 push 到远端的提交 msg
-```lua
-  $git commit --amend
-```
+> `$git commit --amend`
+
 #### 1.5 高级命令
 ##### 1.5.1 回退到上个版本，只保留源码
-```lua
-  $git reset
-```
+> `$git reset`
+
 ##### 1.5.2 回退到上个版本，本地的源码也会变为上一个版本的内容
-```lua
-  $git reset --head HEAD
-```
+> `$git reset --head HEAD`
+
 ##### 1.5.3 当前分支情况下，回退到指定的历史
-```lua
-  $git reset tag
-  $git reset commit_hash
-```
+> `$git reset tag`
+>
+> `$git reset commit_hash`
+
 ##### 1.5.4 暂存当前的变更，不提交
-```lua
-  $git stash
-```
+> `$git stash`
+
 ##### 1.5.5 取出暂存的变更到当前分支
-```lua
-  $git stash pop
-```
+> `$git stash pop`
+
 ##### 1.5.6 撤销当前分支下对某个文件的变更
-```lua
-  $git checkout file_name
-```
+> `$git checkout file_name`
+
 #### 1.6 比较变更
 ##### 1.6.1  显示工作目录与索引区文件之间的差异
-```lua
-  $git diff
-```
+> `$git diff`
+
 ##### 1.6.2  显示工作目录与git仓库之间的差异
-```lua
-  $git diff HEAD
-#比较上次提交
-  $git diff HEAD^
-#比较上2次提交
-  $git diff HEAD~2
-```
+> `$git diff HEAD`
+>
+> 比较上次提交 `$git diff HEAD^`
+>
+> 比较上2次提交 `$git diff HEAD~2`
+
 ##### 1.6.3 当前分支与 other_branch_name 分支进行比较
-```lua
-  $git diff other_branch_name
-```
+> `$git diff other_branch_name`
+
 ##### 1.6.4 使用配置文件中的比较工具进行比较（和 git diff 类似）
-```lua
-  $git difftool
-```
+> `$git difftool`
+
 ##### 1.6.5 查看当前分支与目标分支的文件变更
-```lua
-  $git diff --no-commit-id --name-only --no-merges origin/master..
-```
+> `$git diff --no-commit-id --name-only --no-merges origin/master..`
+
 ##### 1.6.6 查看当前分支文件变更的状态
-```lua
-  $git diff --stat
-```
+> `$git diff --stat`
+
 #### 1.7 远程分支操作
 ##### 1.7.1 查看本地仓库有哪些远程连接（带 url 地址）
-```lua
-#备注： 当 git clone 一个仓库的时候，会自动创建一个别名为 origin 的远程连接到 clone 的仓库。
-  $git remote -v
-```
+> 当 `git clone` 一个仓库的时候，会自动创建一个别名为 origin 的远程连接到 clone 的仓库。
+>
+> `$git remote -v`
+
 ##### 1.7.2  创建一个连接到远程仓库的连接（假如 origin 没有设置）
-```lua
-  $git remote add remote_origin_name https://one_git_remote_url
-```
+> `$git remote add remote_origin_name https://one_git_remote_url`
+
 ##### 1.7.3 当前分支 push 到 远端分支 - 1
-```lua
-#上传本地所有分支代码到远程对应的分支上
-  $git push
-```
+> 上传本地所有分支代码到远程对应的分支上 `$git push`
+
 ##### 1.7.3 当前分支 push 到 远端分支 - 2
-```lua
-#当前分支与多个主机存在追踪关系，则可以使用 -u 选项指定一个默认主机，后面就可以不加任何参数使用 git push。
-  $git push -u orgin master
-```
+> 当前分支与多个主机存在追踪关系，则可以使用 -u 选项指定一个默认主机，后面就可以不加任何参数使用 git push。
+>
+> `$git push -u orgin master`
+
 ##### 1.7.4 当前分支 push 到 远端分支 - 3
-```lua
-#上传本地当前分支代码到 master 分支
-  $git push origin master
-```
+> 上传本地当前分支代码到 master 分支 `$git push origin master`
+
 ##### 1.7.4 获取远端对应分支更新到本地
-```lua
-  $git pull
-```
+> `$git pull`
+
 ##### 1.7.5  获取远端指定分支名 branch_name 到本地
-```lua
-  $git pull origin branch_name
-```
+> `$git pull origin branch_name`
+
 ##### 1.7.6 获取远端分支的更新历史 - 1
-```lua
-  $git fetch
-```
+> `$git fetch`
+
 ##### 1.7.7 获取远端分支的更新历史 - 2
-```lua
-#假如远端分支有被删除，此命令也会把本地对应的分支删除。
-  $git fetch --prune
-```
+> 假如远端分支有被删除，此命令也会把本地对应的分支删除。
+>
+> `$git fetch --prune`
+
 ##### 1.7.8 获取远端更新并合并到当前分支
-```lua
-#此组合命令，和 git pull 的作用一样的。
-#git fetch 获取远端分支到本地，不合并到当前分支。
-#尽量少用git pull，多用git fetch和merge。
-  $git fetch && git merge origin/remote_branch_name
-```
+> 此组合命令，和 `git pull` 的作用一样的。`git fetch` 获取远端分支到本地，不合并到当前分支。尽量少用 `git pull`，多用 `git fetch` 和 `git merge`。
+>
+> `$git fetch && git merge origin/remote_branch_name`
+
 ##### 1.7.9 查看远端所有分支
-```lua
-  $git branch -a
-```
+> `$git branch -a`
+
 ### 2. 一些资料
 #### 2.1 git 命令在线学习
-```lua
-  https://try.github.io
-```
+> https://try.github.io
+
 #### 2.2 git 分支在线学习
-```lua
-  http://learngitbranching.js.org/?NODEMO
-```
+> http://learngitbranching.js.org/?NODEMO
+
 #### 2.3 《Pro Git》 在线免费书
 ##### 2.3.1 英文原版
-```lua
-  https://git-scm.com/book/en/v2
-```
+> https://git-scm.com/book/en/v2
+
 ##### 2.3.2 中文版
-```lua
-  http://git.oschina.net/progit/
-```
+> http://git.oschina.net/progit/
+
 #### 2.4 《Git 权威指南》 在线免费书
-```lua
-  https://github.com/gotgit/gotgit/
-```
+> https://github.com/gotgit/gotgit/
+
 ### 3. git 历史查看工具
 #### 3.1 SourceTree
-```lua
-  https://www.sourcetreeapp.com/
-```
+> https://www.sourcetreeapp.com/
+
 #### 3.2 TortoiseGit
-```lua
-  https://tortoisegit.org/
-```
+> https://tortoisegit.org/
+
 #### 3.3 命令行下的 Git 浏览器
 #### 3.3.1 官网
-```lua
-  https://jonas.github.io/tig/
-```
+> https://jonas.github.io/tig/
+
 ##### 3.3.2 安装
-```lua
-  $sudo apt-get install tig
-or
-  $brew install tig
-```
+> `$sudo apt-get install tig`
+>
+> `$brew install tig`
+
 #### 3.4 gitk
-```lua
-  http://gitk.sourceforge.net/
-```
+> http://gitk.sourceforge.net/
+
 #### 3.5 其他
-```lua
-  https://git-scm.com/downloads/guis
-```
+> https://git-scm.com/downloads/guis
+
 ### 4. 一些文件对比的工具
 #### 4.1 Meld
-```lua
-  http://meldmerge.org/
-```
+> http://meldmerge.org/
+
 #### 4.2 opendiff
-```lua
-  http://guides.macrumors.com/opendiff
-```
+> http://guides.macrumors.com/opendiff
+
 #### 4.3 diff3
-```lua
-  https://en.wikipedia.org/wiki/Diff3
-```
+> https://en.wikipedia.org/wiki/Diff3
+
 #### 4.4 beyond compare
-```lua
-  http://www.scootersoftware.com/
-```
+> http://www.scootersoftware.com/
+
 #### 4.5 P4Merge
-```lua
-  https://www.perforce.com/product/components/perforce-visual-merge-and-diff-tools
-```
+> https://www.perforce.com/product/components/perforce-visual-merge-and-diff-tools
+
 #### 4.6 其他（git 配置文件）
-```lua
-  https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#External-Merge-and-Diff-Tools
-```
+> https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#External-Merge-and-Diff-Tools
+
 ### 5. git flow
 
 #### 5.1  git flow 模型
-```lua
-  http://nvie.com/files/Git-branching-model.pdf
-```
+> http://nvie.com/files/Git-branching-model.pdf
+
 #### 5.2 git flow on github
-```lua
-  https://github.com/nvie/gitflow
-```
+> https://github.com/nvie/gitflow
+
 #### 5.3 基于git的源代码管理模型——git flow
-```lua
-  http://www.ituring.com.cn/article/56870
-```
+> http://www.ituring.com.cn/article/56870
+
 ### 6. 其他
 #### 6.1 命令行我自己常用的 git 历史查询的别名
 ##### 6.1.1 git lg
 > `lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit`
+
 ##### 6.1.2 git tlg
-```lua
-  tlog = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
-```
+> `tlog = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative`
+
 ##### 6.1.3 git plg
-```lua
-  plog = log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'
-```
+> `plog = log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'`
+
 ##### 6.1.4 git glg
 > `glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'`
 
 #### 6.3 所有提交者的提交次数排行榜
-```lua
-  rank = shortlog -sn --no-merges
-```
+> `rank = shortlog -sn --no-merges
+
 #### 6.3 没有被 merge 的删除的分支
-```lua
-  bdm = "!git branch --merged | grep -v '*' | xargs -n 1 git branch -d"
-```
+> `bdm = "!git branch --merged | grep -v '*' | xargs -n 1 git branch -d"`
+
 #### 6.4 彩蛋
 ##### 6.4.1 彩蛋 - 1 （历史重演）
-```lua
-  $git log --reverse -p
-```
+> `$git log --reverse -p`
+
 ##### 6.4.2 彩蛋 - 2（历史追溯）
-```lua
-  $git show HEAD~1
-```
+> `$git show HEAD~1`
+
 ### 参考文献
-```
-https://git-scm.com/doc
-http://nvie.com/posts/a-successful-git-branching-model/
-https://github.com/gotgit/gotgit/
-https://longair.net/blog/2009/04/16/git-fetch-and-merge/
-http://stackoverflow.com/questions/292357/what-is-the-difference-between-git-pull-and-git-fetch
-```
+1. [git document](https://git-scm.com/doc)
+2. [git flow](http://nvie.com/posts/a-successful-git-branching-model/)
+3. [gotgit](https://github.com/gotgit/gotgit/)
+4. [git fetch and merge](https://longair.net/blog/2009/04/16/git-fetch-and-merge/)
+5. [git pull VS git fetch](http://stackoverflow.com/questions/292357/what-is-the-difference-between-git-pull-and-git-fetch)
+
