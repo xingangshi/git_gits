@@ -7,6 +7,8 @@
 > 其他相关文章或链接
 >>
 >> [Git 换行符处理](/git_Line_break_solution.md)
+>>
+>> [Git/Svn Cheat Sheet](/git_svn_cheet)
 
 ### 1. 常见版本管理工具一览
 
