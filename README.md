@@ -3,6 +3,10 @@
 ---
 
 > Notice ! 萌新请先看看另外一篇文章的 [我的 Git 备忘单](/git_cheatsheet.md)
+>
+> 其他相关文章或链接
+>>
+>> [Git 换行符处理](/git_Line_break_solution.md)
 
 ### 1. 常见版本管理工具一览
 
