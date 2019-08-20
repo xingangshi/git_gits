@@ -72,7 +72,7 @@
 >
 > Windows 批处理 bat 文件最好使用 `CRLF` 作为换行符，如果使用 `LF` 风格的换行符，且代码中包含了中文字符，那么解释器可能无法正常工作。
 >
-> 可以上可以通过 [unix2dos 和 dos2unix 解决，参考 1.4 部分内容]("https://github.com/xingangshi/config_tools/blob/master/awesome_commnd_tips.md#1.4 批量转换文件换行符")。
+> 可以上可以通过 [unix2dos 和 dos2unix 解决，参考 1.4 部分内容](https://github.com/xingangshi/config_tools/blob/master/awesome_commnd_tips.md#14-批量转换文件换行符)。
 >
 > **假如是二进制文件被自动转换那就欲哭无泪的。**
 
